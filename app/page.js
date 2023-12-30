@@ -1,6 +1,3 @@
-import Popup from "@/components/page/popup";
-import Sheets from "@/components/page/sheets";
-import { Button } from "@/components/ui/button";
 import { Petit_Formal_Script } from "next/font/google";
 
 const petit = Petit_Formal_Script({ subsets: ["latin"], weight: "400" });

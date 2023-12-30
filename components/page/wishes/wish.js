@@ -1,0 +1,172 @@
+"use client";
+import Image from "next/image";
+import { Albert_Sans } from "next/font/google";
+import moment from "moment";
+import { useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import useSWR from "swr";
+import TextareaAutosize from "react-textarea-autosize";
+import { editMessage, sendMessage } from "@/lib/clientFetch";
+
+const albertSans = Albert_Sans({ subsets: ["latin"] });
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function Wish({ id, name }) {
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
+  const [range, setRange] = useState("");
+  const [awaitMessage, setAwaitMessage] = useState(true);
+  const [loadMore, setLoadMore] = useState(0);
+  const [awaitLoad, setAwaitLoad] = useState(false);
+  const [totalLoaded, setTotalLoaded] = useState(4);
+
+  const { data, isLoading, error, mutate } = useSWR(`/api/messages`, fetcher, {
+    revalidateOnFocus: false,
+  });
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading)
+    return (
+      <div className="mx-auto flex w-full items-center justify-center gap-2 p-10 sm:w-3/4 md:w-2/3 lg:w-1/2">
+        <AiOutlineLoading3Quarters className="animate-spin" />
+        <p
+          className={`${albertSans.className} text-xl font-light text-wedding-100`}
+        >
+          Loading...
+        </p>
+      </div>
+    );
+
+  const count = data.length;
+
+  const filteredData =
+    count <= 4
+      ? data
+      : data.filter(
+          (item) =>
+            item.rowId >= count + loadMore - 1 && item.rowId <= count + 2,
+        );
+
+  const handleLoadMore = () => {
+    setAwaitLoad(true);
+    setTimeout(() => {
+      setLoadMore(loadMore - 4);
+      setTotalLoaded(totalLoaded + 4);
+      console.log(totalLoaded);
+      setAwaitLoad(false);
+    }, 3000);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const checkExist = data.filter((item) => item.guestId === id);
+      const guestId = checkExist[0].guestId;
+      if (guestId == id) {
+        toast.error("You have already sent wishes");
+        setMessage("");
+      }
+    } catch (error) {
+      const data = {
+        name: name,
+        message: message,
+      };
+
+      setLoading(true);
+      setTimeout(async () => {
+        await sendMessage(data);
+        setMessage("");
+        await mutate();
+        setLoading(false);
+      }, 2000);
+    }
+  };
+
+  return (
+    <section className="bg-wedding-50 mt-10 flex min-h-screen flex-col p-5 sm:items-center sm:justify-center sm:p-5">
+      <div className="relative mt-10 flex w-full flex-col items-end gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
+        <div className="absolute -left-20 -top-10 h-[250px] w-[250px] sm:right-10">
+          <Image
+            src={"/wedding/26.png"}
+            alt="background"
+            width={500}
+            height={500}
+            className={""}
+          />
+        </div>
+        <p className="relative mb-2 font-garet text-sm">THE WISHES</p>
+        <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
+        <p className="font-hilsfiger relative text-4xl">Wedding Wish</p>
+      </div>
+
+      <div className="border-wedding-75 mt-32 flex w-full flex-col items-center justify-center gap-3 border-b sm:w-3/4 md:w-2/3 lg:w-1/2">
+        <p
+          className={`${albertSans.className}text-wedding-75 text-center font-garet text-xl`}
+        >{`Dear ${name}, please write your wishes`}</p>
+        <form
+          className="flex w-full flex-col items-center justify-center gap-3"
+          onSubmit={handleSubmit}
+        >
+          <TextareaAutosize
+            required
+            className={`text-wedding-75 w-full rounded-md bg-white p-2 ${albertSans.className} font-light focus-visible:outline-none`}
+            placeholder={`Your wishes`}
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+          />
+          <button
+            disabled={loading || id == null}
+            className={`flex items-center gap-2 rounded-full bg-wedding-100 px-4 py-2 text-white disabled:cursor-not-allowed ${albertSans.className} mb-5 w-fit font-light transition duration-200 hover:bg-wedding-100 disabled:bg-wedding-100/50`}
+          >
+            {loading && (
+              <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
+            )}
+            Send Wishes
+          </button>
+        </form>
+      </div>
+      <div className="flex w-full flex-col flex-col-reverse gap-3 py-10 sm:w-3/4 md:w-2/3 lg:w-1/2">
+        {filteredData.map((item) => {
+          return (
+            <div
+              className="border-wedding-25 flex flex-col border-b"
+              key={item.guestId}
+            >
+              <p
+                className={`${albertSans.className} text-wedding-75 relative text-base font-medium`}
+              >
+                {item.name}
+              </p>
+              <p
+                className={`${albertSans.className} text-wedding-25 relative text-xs`}
+              >
+                {moment(item.postTime).format("MMM DD, YYYY HH:mm")}
+              </p>
+              <p
+                className={`${albertSans.className} text-wedding-75 mb-2 text-base font-light`}
+              >
+                {item.message}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex justify-center">
+        {data.length > 4 && totalLoaded + 1 <= count && (
+          <button
+            onClick={handleLoadMore}
+            disabled={awaitLoad}
+            className={`${albertSans.className} flex w-fit items-center gap-2 rounded-full bg-wedding-100 px-4 py-2 text-white disabled:cursor-not-allowed disabled:opacity-50`}
+          >
+            {awaitLoad && (
+              <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
+            )}
+            Load more
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}

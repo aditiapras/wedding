@@ -20,8 +20,9 @@ export default function AnimeText({
       <Zoom
         duration={duration}
         delay={delay}
+        // triggerOnce={true}
         className={twMerge(
-          `${onest.className} font-extralight text-wedding-100`,
+          `${onest.className} text-wedding-100 font-extralight`,
           className,
         )}
       >
@@ -34,8 +35,9 @@ export default function AnimeText({
         duration={duration}
         delay={delay}
         direction={direction}
+        // triggerOnce={true}
         className={twMerge(
-          `${onest.className} font-extralight text-wedding-100`,
+          `${onest.className} text-wedding-100 font-extralight`,
           className,
         )}
       >
@@ -48,8 +50,9 @@ export default function AnimeText({
         duration={duration}
         delay={delay}
         direction={direction}
+        // triggerOnce={true}
         className={twMerge(
-          `${onest.className} font-extralight text-wedding-100`,
+          `${onest.className} text-wedding-100 font-extralight`,
           className,
         )}
       >
@@ -62,8 +65,9 @@ export default function AnimeText({
         duration={duration}
         delay={delay}
         direction={direction}
+        // triggerOnce={true}
         className={twMerge(
-          `${onest.className} font-extralight text-wedding-100`,
+          `${onest.className} text-wedding-100 font-extralight`,
           className,
         )}
       >

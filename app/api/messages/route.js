@@ -70,7 +70,7 @@ export async function POST(req) {
           body.address,
           body.time,
           body.rsvp,
-          `=VLOOKUP("${body.name}",Guest!A:E,5,0)`,
+          `=VLOOKUP("${body.name}",Guest!A:E,3,0)`,
           `="Message!B"&MATCH("${body.name}",Message!A:A,0)`,
         ],
       ],

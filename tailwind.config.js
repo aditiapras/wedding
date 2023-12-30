@@ -1,10 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  safelist: [
-    "!duration-[0ms]",
-    "!delay-[0ms]",
-    'html.js :where([class*="taos:"]:not(.taos-init))',
-  ],
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,jsx}",
@@ -12,6 +7,7 @@ module.exports = {
     "./app/**/*.{js,jsx}",
     "./src/**/*.{js,jsx}",
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -26,9 +22,18 @@ module.exports = {
         elagern: ["Elagern", "sans-serif"],
         altha: ["Althafia Display", "sans-serif"],
         samudera: ["Samudera", "sans-serif"],
+        sharpe: ["Sharpe PERSONAL", "sans-serif"],
+        gloock: ["Gloock", "sans-serif"],
+        danviska: ["Danviska", "sans-serif"],
+        navitism: ["Navitism", "sans-serif"],
+        hilsfiger: ["Hilsfiger", "sans-serif"],
+        helvetica: ["Helvetica Neue", "sans-serif"],
       },
       colors: {
         wedding: {
+          25: "#9D9B94",
+          50: "#F3F2F1",
+          75: "#284135",
           100: "#034A44",
           200: "#041E1B",
           300: "#9B5050",
@@ -39,53 +44,15 @@ module.exports = {
           800: "#F4EADC",
           900: "#FAF5EF",
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0" },
         },
       },
       animation: {

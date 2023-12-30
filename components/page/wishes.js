@@ -1,6 +1,4 @@
 "use client";
-import { Fade, Zoom } from "react-awesome-reveal";
-import Text from "../animated/animated-text";
 import TextareaAutosize from "react-textarea-autosize";
 import useSWR from "swr";
 import AnimeText from "../animated/text-animated";
@@ -21,6 +19,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Pencil } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Onest } from "next/font/google";
+
+const onest = Onest({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -44,6 +50,13 @@ export default function Wishes({ font, person, id }) {
         loading...
       </p>
     );
+  if (data) {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      delay: 500,
+    });
+  }
 
   const count = data.length;
 
@@ -108,16 +121,28 @@ export default function Wishes({ font, person, id }) {
 
   return (
     <>
-      <AnimeText animate={"zoom"} duration={1000} className={`mt-5 text-3xl`}>
+      <p
+        className="font-garet text-3xl text-wedding-100"
+        data-aos="fade"
+        data-aos-once="true"
+        data-aos-anchor-placement="top-bottom"
+      >
         Wedding Wishes
-      </AnimeText>
+      </p>
+
       <form
         className="flex w-full flex-col items-center gap-5"
         onSubmit={handleSubmit}
       >
-        <AnimeText animate={"fade"} duration={1000} delay={1000}>
+        <p
+          className="font-garet text-base text-wedding-100"
+          data-aos="fade"
+          data-aos-once="true"
+          data-aos-anchor-placement="top-bottom"
+        >
           {`Dear  ${person == null ? "" : person}, please write your wishes`}
-        </AnimeText>
+        </p>
+
         <TextareaAutosize
           required
           className={`w-full rounded-md bg-wedding-900 p-2 text-wedding-100 ${font.className} font-light focus-visible:outline-none`}
@@ -127,7 +152,7 @@ export default function Wishes({ font, person, id }) {
         />
         <button
           disabled={loading || id == null}
-          className={`flex items-center gap-2 rounded-full bg-wedding-100/90 px-4 py-2 disabled:cursor-not-allowed ${font.className} font-light text-white transition duration-200 hover:bg-wedding-100 disabled:bg-wedding-100/50`}
+          className={`flex items-center gap-2 rounded-full bg-wedding-100 px-4 py-2 text-white disabled:cursor-not-allowed ${font.className} font-light transition duration-200  hover:bg-wedding-100 disabled:bg-wedding-100/50`}
         >
           {loading && (
             <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
@@ -136,31 +161,33 @@ export default function Wishes({ font, person, id }) {
         </button>
       </form>
       <div
-        className={`${font.className} flex w-full flex-col flex-col-reverse gap-5 font-light text-wedding-100`}
+        className={`${font.className} flex w-full flex-col flex-col-reverse gap-5 font-light `}
       >
         {filteredData && filteredData.length >= 1 && (
           <>
             {filteredData.map((message) => (
               <div
                 key={message.guestId}
-                className="flex flex-col  gap-2 border-b border-b-wedding-100 pb-2"
+                className="flex flex-col  gap-2 border-b border-wedding-100 pb-2"
               >
-                <div className={`flex justify-between `}>
-                  <AnimeText
-                    animate={"fade"}
-                    duration={1000}
-                    className="text-sm font-medium"
+                <div className={`flex justify-between`}>
+                  <p
+                    className={`${onest.className} text-sm font-medium text-wedding-100`}
+                    data-aos="fade"
+                    data-aos-anchor-placement="top-bottom"
+                    data-aos-duration="500"
+                    data-aos-once="true"
                   >
                     {message.name}
-                  </AnimeText>
+                  </p>
                   {message.guestId == id && (
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <button
                           type="button"
-                          className="flex items-center gap-1 text-sm hover:underline hover:decoration-wedding-100 hover:underline-offset-2"
+                          className="flex items-center gap-1 text-sm text-wedding-100 hover:underline hover:decoration-wedding-100 hover:underline-offset-2"
                         >
-                          <Pencil className="h-3 w-3" />
+                          <Pencil className="h-3 w-3 text-wedding-100" />
                           Edit
                         </button>
                       </AlertDialogTrigger>
@@ -194,14 +221,14 @@ export default function Wishes({ font, person, id }) {
                           >
                             <AlertDialogCancel
                               variant="ghost"
-                              className={`${font.className} mt-0 rounded-full bg-white px-4 py-2 font-light text-wedding-100 hover:bg-wedding-900`}
+                              className={`${font.className} mt-0 rounded-full bg-white px-4 py-2 font-light text-wedding-100 hover:bg-white/70`}
                               asChild
                             >
                               <button type="button">Cancel</button>
                             </AlertDialogCancel>
                             <AlertDialogAction
                               asChild
-                              className={`${font.className} rounded-full bg-wedding-100/90 px-4 py-2 font-light text-white hover:bg-wedding-100`}
+                              className={`${font.className} rounded-full bg-wedding-100/90 px-4 py-2 font-light hover:bg-wedding-100 `}
                             >
                               <button type="submit">Save changes</button>
                             </AlertDialogAction>
@@ -211,20 +238,24 @@ export default function Wishes({ font, person, id }) {
                     </AlertDialog>
                   )}
                 </div>
-                <AnimeText
-                  animate={"fade"}
-                  duration={1000}
-                  className="text-xs font-normal"
+                <p
+                  className={`${onest.className} text-xs font-normal text-wedding-100`}
+                  data-aos="fade"
+                  data-aos-anchor-placement="top-bottom"
+                  data-aos-duration="500"
+                  data-aos-once="true"
                 >
                   {moment(message.postTime).format("MMM DD, YYYY HH:mm")}
-                </AnimeText>
-                <AnimeText
-                  animate={"fade"}
-                  duration={1500}
-                  className={`text-sm ${awaitMessage ? "" : "animate-pulse"}`}
+                </p>
+                <p
+                  className={`${onest.className} text-sm font-light text-wedding-100`}
+                  data-aos="fade"
+                  data-aos-anchor-placement="top-bottom"
+                  data-aos-duration="500"
+                  data-aos-once="true"
                 >
                   {awaitMessage ? message.message : "Awaiting New Message..."}
-                </AnimeText>
+                </p>
               </div>
             ))}
           </>
@@ -234,7 +265,7 @@ export default function Wishes({ font, person, id }) {
         <button
           onClick={handleLoadMore}
           disabled={awaitLoad}
-          className={`${font.className} flex items-center gap-2 rounded-full bg-wedding-100/90 px-4 py-2 text-sm font-light text-white transition duration-200 hover:bg-wedding-100 disabled:bg-wedding-100/50`}
+          className={`${font.className} flex items-center gap-2 rounded-full bg-wedding-600 px-4 py-2 text-sm font-light transition duration-200  hover:bg-wedding-700 disabled:bg-wedding-600/50`}
         >
           {awaitLoad && (
             <AiOutlineLoading3Quarters className="animate-spin"></AiOutlineLoading3Quarters>
