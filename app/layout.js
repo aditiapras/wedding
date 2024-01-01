@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
+import { ParallaxProviders } from "./paralax-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,8 +27,10 @@ export default function RootLayout({ children }) {
         />
         <meta property="og:image:type" content="image/png" />
       </head>
-      <body className={inter.className}>
-        <Providers>{children}</Providers>
+      <body className={`${inter.className} bg-wedding-50`}>
+        <Providers>
+          <ParallaxProviders>{children}</ParallaxProviders>
+        </Providers>
       </body>
     </html>
   );

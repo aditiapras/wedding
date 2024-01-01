@@ -5,6 +5,6 @@ export default async function Sheets() {
     cache: "no-store",
   }).then((res) => res.json());
   return (
-    <div className="w-full min-h-screen flex items-center justify-center"></div>
+    <div className="flex min-h-screen w-full items-center justify-center"></div>
   );
 }

@@ -100,7 +100,7 @@ export default function Wish({ id, name }) {
         <p className="font-hilsfiger relative text-4xl">Wedding Wish</p>
       </div>
 
-      <div className="border-wedding-75 mt-32 flex w-full flex-col items-center justify-center gap-3 border-b sm:w-3/4 md:w-2/3 lg:w-1/2">
+      <div className="border-wedding-75/50 mt-32 flex w-full flex-col items-center justify-center gap-3  sm:w-3/4 md:w-2/3 lg:w-1/2">
         <p
           className={`${albertSans.className}text-wedding-75 text-center font-garet text-xl`}
         >{`Dear ${name}, please write your wishes`}</p>
@@ -110,7 +110,7 @@ export default function Wish({ id, name }) {
         >
           <TextareaAutosize
             required
-            className={`text-wedding-75 w-full rounded-md bg-white p-2 ${albertSans.className} font-light focus-visible:outline-none`}
+            className={`text-wedding-75 w-full rounded-md bg-white p-2 font-garet font-light focus-visible:outline-none`}
             placeholder={`Your wishes`}
             onChange={(e) => setMessage(e.target.value)}
             value={message}
@@ -130,21 +130,19 @@ export default function Wish({ id, name }) {
         {filteredData.map((item) => {
           return (
             <div
-              className="border-wedding-25 flex flex-col border-b"
+              className="border-wedding-75/50 flex flex-col border-b"
               key={item.guestId}
             >
               <p
-                className={`${albertSans.className} text-wedding-75 relative text-base font-medium`}
+                className={`${albertSans.className} text-wedding-75 relative text-base font-medium `}
               >
                 {item.name}
               </p>
-              <p
-                className={`${albertSans.className} text-wedding-25 relative text-xs`}
-              >
+              <p className={`text-wedding-25 relative font-garet text-xs`}>
                 {moment(item.postTime).format("MMM DD, YYYY HH:mm")}
               </p>
               <p
-                className={`${albertSans.className} text-wedding-75 mb-2 text-base font-light`}
+                className={`text-wedding-75 mb-2 font-garet text-sm font-light`}
               >
                 {item.message}
               </p>
