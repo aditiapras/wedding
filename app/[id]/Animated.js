@@ -1,24 +1,41 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { Albert_Sans } from "next/font/google";
-import { guestLists } from "@/lib/serverFetch";
 import Wish from "@/components/page/wishes/wish";
 import { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import { Fade, Zoom } from "react-reveal";
 import { Loader2 } from "lucide-react";
 import { ParallaxBanner, ParallaxBannerLayer } from "react-scroll-parallax";
+import useSound from "use-sound";
+import Lightbox from "react-awesome-lightbox";
+import "react-awesome-lightbox/build/style.css";
 
-const albertSans = Albert_Sans({ subsets: ["latin"] });
 const lenis = new Lenis();
+
+let images = [
+  { url: "/portrait/us/1.jpeg", title: "1" },
+  { url: "/portrait/us/2.jpeg", title: "2" },
+  { url: "/portrait/us/3.jpeg", title: "3" },
+  { url: "/portrait/us/4.jpeg", title: "4" },
+  { url: "/portrait/us/5.jpeg", title: "5" },
+  { url: "/portrait/us/6.jpeg", title: "6" },
+  { url: "/portrait/us/7.jpeg", title: "7" },
+  { url: "/portrait/us/11.jpg", title: "8" },
+  { url: "/portrait/us/12.jpg", title: "9" },
+];
 
 export default function AnimatedPage({ data, id, name }) {
   const [mounted, setMounted] = useState(false);
+  const [show, setShow] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [play] = useSound("/song.mp3");
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
       setMounted(true);
+      setShow(true);
     }, 2000);
 
     function raf(time) {
@@ -28,6 +45,52 @@ export default function AnimatedPage({ data, id, name }) {
 
     requestAnimationFrame(raf);
   }, []);
+
+  if (show) {
+    return (
+      <div
+        className={`${
+          clicked ? "-translate-y-full" : ""
+        } mx-auto flex min-h-screen w-full flex-col items-center justify-center transition duration-1000 ease-in-out`}
+      >
+        <Image
+          src={"/portrait/collage/19.jpeg"}
+          alt="wedding"
+          fill
+          className="absolute opacity-30"
+          style={{ objectFit: "cover" }}
+          quality={100}
+        />
+        <div className="from-wedding-50 absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t to-transparent"></div>
+        <div className="from-wedding-50 absolute top-0 z-10 h-1/3 w-full bg-gradient-to-b to-transparent"></div>
+        <div className="relative z-20 mt-10  flex flex-col items-center justify-center">
+          <div className="my-16 flex flex-col items-center justify-center gap-2">
+            <p className="text-invitation-600 font-montserrat relative text-xl md:text-3xl">
+              The Wedding of
+            </p>
+            <p className="text-invitation-600 text-5xl italic">
+              Aning <span className="font-altha">&</span> Adit
+            </p>
+            <p className="text-invitation-600 font-garet text-lg">
+              20th January 2024
+            </p>
+          </div>
+          <button
+            onClick={() => {
+              setClicked(true);
+              setTimeout(() => {
+                setShow(false);
+              }, 1000);
+              play();
+            }}
+            className="font-montserrat bg-invitation-400 hover:bg-invitation-300 relative rounded-full px-4 py-2 text-white transition duration-200 active:scale-95"
+          >
+            Open Invitation
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (!mounted)
     return (
@@ -54,428 +117,540 @@ export default function AnimatedPage({ data, id, name }) {
     );
 
   return (
-    <main className="text-wedding-75 bg-wedding-50">
-      <section className="bg-wedding-50 text-wedding-75 flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <div className="absolute right-10 top-10 z-10 flex flex-col items-center">
-          <p className="font-hilsfiger text-xl">20</p>
-          <p className="font-hilsfiger text-xl">/</p>
-          <p className="font-hilsfiger text-xl">01</p>
-        </div>
-        <Fade bottom>
-          <div className="absolute right-0 h-[500px] w-[1166px]  overflow-hidden">
-            <Image
-              src={"/bg/0.png"}
-              alt="background"
-              width={1748}
-              height={750}
-              className={"absolute right-0"}
-            />
-          </div>
-        </Fade>
-        <Fade bottom cascade>
-          <div className="relative flex w-full flex-col items-start justify-start px-5 sm:w-3/4 md:mt-20 md:w-2/3 lg:w-1/2">
-            <p className="font-hilsfiger text-4xl md:text-7xl">wedding</p>
-            <p className="font-hilsfiger text-4xl md:text-7xl">invitation</p>
-            {/* <Fade bottom> */}
-            {/* </Fade> */}
-
-            {/* <Link
-        href={"/wedding#wedding"}
-        className="bg-wedding-50/80 border-wedding-75 hover:bg-wedding-75 hover:text-wedding-50 mt-5 rounded-full border px-4 py-1 font-garet transition duration-200"
-        >
-        View Invitation
-    </Link> */}
-          </div>
-        </Fade>
-      </section>
-
-      <section className="bg-wedding-50 flex flex-col">
-        <div className="relative mx-auto flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <div className="absolute right-0 top-0 flex flex-col gap-2">
-            <p className="font-hilsfiger text-wedding-75 mr-5 text-lg">20</p>
-            <p className="font-hilsfiger text-wedding-75 text-lg">01</p>
-            <p className="font-hilsfiger text-wedding-75 text-lg">24</p>
-          </div>
-          <div className="flex w-full flex-col px-5 md:px-0">
-            <Fade bottom>
-              <p className="mb-2 font-garet text-sm md:px-0">
-                HELLO, <span className="uppercase">{name}</span>
-              </p>
-            </Fade>
-            <Fade bottom>
-              <div className="mb-3 h-0.5 w-10 bg-zinc-400"></div>
-            </Fade>
-          </div>
-          <div className="flex w-full flex-col">
-            <div className="w-2/3 items-start">
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/10.jpg", speed: -5 }]}
-                className="aspect-square grayscale"
-              />
-            </div>
-          </div>
-          <div className="grid -translate-y-16 justify-items-end">
-            <div className="w-2/3">
-              <ParallaxBanner
-                layers={[
-                  { image: "/portrait/collage/IMG_2802.JPG", speed: -5 },
-                ]}
-                className="aspect-square grayscale"
-              />
-            </div>
-            <p
-              className={`text-wedding-25 mt-5 px-5 font-garet italic md:w-1/3 md:px-0`}
+    <>
+      {!show && (
+        <main className="text-invitation-600 bg-invitation-100">
+          {/* OPENING */}
+          <section className="bg-invitation-100 text-wedding-75 relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+            <div
+              className={`font-montserrat relative flex w-full flex-col font-bold sm:w-3/4 md:w-2/3 lg:w-1/2`}
             >
-              &quot;From stranger to lovers, looking forward to a lifetime of
-              years together with you&quot;
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* <Fade bottom>
-        <div className="relative mx-auto mt-16 flex w-full flex-col items-center justify-center sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <Image
-            src={"/wedding/29.png"}
-            alt="wedding"
-            width={200}
-            height={200}
-            className="absolute right-0"
-          />
-        </div>
-      </Fade> */}
-
-      <section className="bg-wedding-50 flex min-h-screen flex-col p-5 sm:items-center sm:justify-center sm:p-5">
-        <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <Fade bottom>
-            <p className="mb-2 font-garet text-sm">THE INVITE</p>
-          </Fade>
-          <Fade bottom>
-            <div className="mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-          </Fade>
-
-          <Fade bottom>
-            <p
-              className={`${albertSans.className} text-wedding-25 text-lg font-light`}
-            >
-              Bismillahirrahmanirrahim
-            </p>
-          </Fade>
-          <Fade bottom>
-            <p
-              className={`${albertSans.className} text-wedding-25 w-4/3 text-lg font-light md:w-1/3`}
-            >
-              Assalamualaikum Warahmatullahi Wabarakatuh, with the blessing and
-              mercy from Allah SWT We cordially invite you to the wedding of
-              Aning & Adit as they exchange vows and start their journey
-              together as one.
-            </p>
-          </Fade>
-          <div className="flex w-full flex-col items-end">
-            <p className="relative mb-2 mt-10 font-garet text-sm">
-              THE BRIDE AND THE GROOM
-            </p>
-            <div className="mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-          </div>
-
-          <div className="flex w-full flex-col gap-5">
-            <div className="flex w-full flex-col">
-              <p className="font-hilsfiger text-left text-2xl md:text-3xl">
-                Masning Maunah S.P.
-              </p>
-              <p
-                className={`${albertSans.className} text-wedding-25 mt-2 text-sm`}
-              >
-                The Daughter of Mr. Drs. H. M Mulyono and
-              </p>
-              <p className={`${albertSans.className} text-wedding-25 text-sm`}>
-                Mrs. Hj. Nining Raniah S.E.
-              </p>
+              <div className="absolute right-5 top-5 flex flex-col items-center justify-center">
+                <p className=" text-xl">20</p>
+                <p className=" text-xl">/</p>
+                <p className=" text-xl">01</p>
+              </div>
             </div>
-            <Fade bottom>
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/15.jpeg", speed: -10 }]}
-                className="aspect-video"
-              />
-            </Fade>
 
-            {/* <Zoom>
-              <div className="flex w-full justify-center">
+            <Fade bottom>
+              <div className="absolute h-[760px] w-[650px] overflow-hidden md:h-[468px] md:w-[400px]">
                 <Image
-                  src={"/portrait/collage/3.jpeg"}
+                  src={"/illustration/hallway.png"}
                   alt="background"
-                  height={800}
-                  width={800}
-                  className="rounded-lg shadow-lg"
+                  width={1000}
+                  height={1000}
+                  className={"opacity-20"}
+                />
+                <div className="from-invitation-100 absolute -bottom-3 h-32 w-full bg-gradient-to-t to-transparent"></div>
+              </div>
+            </Fade>
+
+            <Fade bottom cascade>
+              <div className="relative flex h-screen w-full flex-col items-center justify-center sm:w-3/4 md:w-2/3 lg:w-1/2">
+                <p
+                  className={`font-seasons w-[200px] text-center text-4xl font-bold md:w-[300px] md:text-5xl`}
+                >
+                  WEDDING
+                </p>
+                <p
+                  className={`font-seasons w-[200px] text-center text-4xl font-bold md:w-[300px] md:text-5xl`}
+                >
+                  INVITATION
+                </p>
+                <div className="mt-5 flex w-full flex-col items-center justify-center">
+                  <div className="relative h-[364px] w-[250px] md:h-[500px] md:w-[300px]">
+                    <Image
+                      src={"/portrait/page1.png"}
+                      alt="portrait"
+                      width={350}
+                      height={510}
+                    />
+                    {/* <div className="from-invitation-100 absolute bottom-0 h-16 w-full bg-gradient-to-t to-transparent"></div> */}
+                  </div>
+                </div>
+              </div>
+            </Fade>
+
+            <div
+              className={`relative flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2`}
+            >
+              <Image
+                src={"/illustration/Logo AA.png"}
+                alt="logo"
+                width={60}
+                height={60}
+                className="absolute bottom-5 right-5"
+              />
+            </div>
+          </section>
+
+          {/* BRIDE AND GROOM */}
+          <section className="bg-invitation-100 mt-10 flex min-h-screen flex-col overflow-hidden p-5 sm:items-center sm:justify-center sm:p-5">
+            <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
+              <div className="absolute right-0 h-[208px] w-[275px]">
+                <Image
+                  src={"/illustration/Flower vase.png"}
+                  alt="wedding"
+                  width={500}
+                  height={500}
+                  className="opacity-20"
                 />
               </div>
-            </Zoom> */}
+              <Fade bottom>
+                <p className="font-seasons mb-2 text-xl uppercase">
+                  The Invite
+                </p>
+              </Fade>
+              <Fade bottom>
+                <div className="bg-invitation-500 mb-3 h-0.5 w-10 "></div>
+              </Fade>
 
-            <div className="flex w-full flex-col">
-              <p className="font-hilsfiger text-right text-2xl md:text-3xl">
-                Aditia Prasetian S.T.
+              <Fade bottom>
+                <p
+                  className={`text-invitation-600 font-garet text-base font-light`}
+                >
+                  Bismillahirrahmanirrahim
+                </p>
+              </Fade>
+              <Fade bottom>
+                <p
+                  className={`text-invitation-600 w-4/3 font-garet text-base font-light md:w-1/3`}
+                >
+                  Assalamualaikum Warahmatullahi Wabarakatuh, with the blessing
+                  and mercy from Allah SWT We cordially invite you to the
+                  wedding of Aning & Adit as they exchange vows and start their
+                  journey together as one.
+                </p>
+              </Fade>
+
+              <Fade bottom>
+                <div className="mt-10 flex w-full flex-col items-end">
+                  <p className={`font-seasons mb-2 text-xl uppercase`}>
+                    The Bride and The Groom
+                  </p>
+                  <div className="bg-invitation-500 mb-3 h-0.5 w-10 "></div>
+                </div>
+              </Fade>
+
+              <div className="flex w-full flex-col gap-5">
+                <div className="relative flex w-full flex-col">
+                  <Zoom>
+                    <div className="absolute right-16 w-[250px] md:right-8 md:w-[350px]">
+                      <Image
+                        src={"/wedding/3.png"}
+                        alt="wedding"
+                        width={300}
+                        height={300}
+                      />
+                    </div>
+                  </Zoom>
+
+                  <Fade bottom>
+                    <div className="relative mt-5 flex w-full justify-end">
+                      <div className="w-[225px] md:w-[300px]">
+                        <Image
+                          src={"/portrait/aning.png"}
+                          alt="wedding"
+                          width={350}
+                          height={350}
+                        />
+                      </div>
+                    </div>
+                  </Fade>
+
+                  <Fade bottom cascade>
+                    <div className="relative mt-1 flex w-full flex-col">
+                      <p
+                        className={`font-seasons text-right text-2xl md:text-3xl`}
+                      >
+                        Masning Maunah S.P.
+                      </p>
+                      <p
+                        className={`text-wedding-25 text-right font-garet text-sm`}
+                      >
+                        The Daughter of Mr. Drs. H. M Mulyono and
+                      </p>
+                      <p
+                        className={`text-wedding-25 text-right font-garet text-sm`}
+                      >
+                        Mrs. Hj. Nining Raniah S.E.
+                      </p>
+                    </div>
+                  </Fade>
+                </div>
+
+                <div className="relative mt-10 flex w-full flex-col">
+                  <Zoom>
+                    <div className="absolute -top-10 left-10 w-[250px] md:left-16 md:w-[350px]">
+                      <Image
+                        src={"/wedding/3.png"}
+                        alt="wedding"
+                        width={300}
+                        height={300}
+                        className="rotate-90"
+                      />
+                    </div>
+                  </Zoom>
+
+                  <Fade bottom>
+                    <div className="relative w-[225px] md:w-[300px]">
+                      <Image
+                        src={"/portrait/adit.png"}
+                        alt="wedding"
+                        width={350}
+                        height={350}
+                        className="opacity-100"
+                      />
+                    </div>
+                  </Fade>
+
+                  <Fade bottom cascade>
+                    <div className="relative mt-1 flex w-full flex-col">
+                      <p
+                        className={`font-seasons text-left text-2xl md:text-3xl`}
+                      >
+                        Aditia Prasetian S.T.
+                      </p>
+                      <p className={`text-wedding-25 mt-1 font-garet text-sm`}>
+                        The Son of Mr. Cece Rustandi and
+                      </p>
+                      <p className={`text-wedding-25 font-garet text-sm`}>
+                        Mrs. (Almh) Setia Komala
+                      </p>
+                    </div>
+                  </Fade>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* DATE AND VENUE */}
+          <section className="bg-invitation-100 relative mt-10 flex flex-col overflow-hidden p-5 sm:items-center sm:justify-center sm:p-5">
+            <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
+              <div className="absolute right-0 top-0 hidden h-[250px] w-[250px]">
+                <Image
+                  src={"/wedding/25.png"}
+                  alt="background"
+                  width={500}
+                  height={500}
+                  className={"grayscale"}
+                />
+              </div>
+              <p className="font-seasons relative mb-2 text-xl uppercase">
+                The Date and The Venue
               </p>
+              <div className="bg-invitation-500 relative mb-3 h-0.5 w-10"></div>
+
+              <div className="relative flex w-full flex-col items-start gap-0">
+                <div className="absolute -bottom-3 -right-2/3 md:-right-20">
+                  <Image
+                    src={"/illustration/library.png"}
+                    alt="background"
+                    width={500}
+                    height={500}
+                    className="opacity-20"
+                  />
+                </div>
+                <p
+                  className={`font-montserrat relative mb-3 text-2xl font-medium md:text-3xl`}
+                >
+                  Religious Ceremony
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Friday, 19th January 2024
+                </p>
+                <p
+                  className={`font-montserrat relative text-sm font-bold md:text-lg`}
+                >
+                  08:30~10:30
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Masjid Riyadhul Jannah Al Maunah
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Perum Kodam Blok A No. 27
+                </p>
+                <p
+                  className={`relative text-right font-garet text-sm md:text-lg`}
+                >
+                  Kec. Mustikajaya, Kota Bekasi,
+                </p>
+                <p
+                  className={`relative text-right font-garet text-sm md:text-lg`}
+                >
+                  Jawa Barat. 17158. Indonesia.
+                </p>
+              </div>
+
+              <div className="relative mt-16 flex w-full flex-col items-end gap-0">
+                <div className="absolute -bottom-28 -left-10">
+                  <Image
+                    src={"/wedding/27.png"}
+                    alt="background"
+                    width={200}
+                    height={200}
+                    className="opacity-70"
+                  />
+                </div>
+                <p
+                  className={`font-montserrat relative mb-3 text-2xl font-medium md:text-3xl`}
+                >
+                  Wedding Reception
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Saturday, 20th January 2024
+                </p>
+                <p
+                  className={`font-montserrat relative text-sm font-bold md:text-lg`}
+                >
+                  09:00~15:00
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Lapangan Parkir SD Rejis
+                </p>
+                <p className={`relative font-garet text-sm md:text-lg`}>
+                  Perum Kodam Blok A No. 27
+                </p>
+                <p
+                  className={`relative text-right font-garet text-sm md:text-lg`}
+                >
+                  Kec. Mustikajaya, Kota Bekasi,
+                </p>
+                <p
+                  className={`relative text-right font-garet text-sm md:text-lg`}
+                >
+                  Jawa Barat. 17158. Indonesia.
+                </p>
+              </div>
               <p
-                className={`${albertSans.className} text-wedding-25 mt-2 text-right text-sm`}
+                className={`relative mt-5 w-full text-right font-garet text-xs md:text-lg`}
               >
-                The Son of Mr. Cece Rustandi and
+                Please join us as we celebrate our wedding.
               </p>
+              <div className="mt-5 flex w-full justify-end">
+                <a
+                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240120T020000Z%2F20240120T080000Z&details=Assalamualaikum%20Warahmatullahi%20Wabarakatuh%2C%20with%20the%20blessing%20and%20mercy%20from%20Allah%20SWT%20We%20cordially%20invite%20you%20to%20the%20wedding%20of%20Aning%20%26%20Adit%20as%20they%20exchange%20vows%20and%20start%20their%20journey%20together%20as%20one.&location=Bekasi&text=Wedding%27s%20of%20Aning%20%26%20Adit%20"
+                  target="_blank"
+                  className={`text-wedding-75  bg-invitation-500 hover:bg-invitation-500/80 text-md relative w-fit rounded-full px-4 py-2 font-garet text-white transition duration-200`}
+                >
+                  Add to calendar
+                </a>
+              </div>
+              <div className="mt-2 flex w-full justify-end">
+                <a
+                  href="https://maps.app.goo.gl/Zv5AiFmqf1cuAAKy5"
+                  target="_blank"
+                  className={`text-wedding-75  bg-invitation-500 hover:bg-invitation-500/80 text-md relative w-fit rounded-full px-4 py-2 font-garet text-white transition duration-200`}
+                >
+                  View on Maps
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* QUOTES */}
+          <section className="bg-invitation-100 relative mt-10 flex flex-col overflow-hidden sm:items-center sm:justify-center sm:p-5">
+            <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
+              <div className="flex w-full flex-col px-5 md:px-0">
+                <Fade bottom>
+                  <p className="font-seasons mb-2 text-xl uppercase">
+                    where we started
+                  </p>
+                </Fade>
+                <Fade bottom>
+                  <div className="bg-invitation-500 mb-3 h-0.5 w-10"></div>
+                </Fade>
+              </div>
+              <div className="mt-5 flex w-full flex-col items-center justify-center">
+                <div className="w-2/3 items-center">
+                  <ParallaxBanner
+                    layers={[{ image: "/portrait/us/11.jpg", speed: -5 }]}
+                    className="aspect-square hover:cursor-pointer"
+                    onClick={() => {
+                      setOpen(true);
+                      setIndex(7);
+                    }}
+                  />
+                  <ParallaxBanner
+                    layers={[{ image: "/portrait/us/12.jpg", speed: -5 }]}
+                    className="mt-4 aspect-square hover:cursor-pointer"
+                    onClick={() => {
+                      setOpen(true);
+                      setIndex(8);
+                    }}
+                  />
+                </div>
+              </div>
+
               <p
-                className={`${albertSans.className} text-wedding-25 text-right text-sm`}
+                className={`text-invitation-500 mt-5 px-5 font-garet italic md:w-1/3 md:px-0`}
               >
-                Mrs. (Almh) Setia Komala
+                &quot;From stranger to lovers, looking forward to a lifetime of
+                years together with you.&quot;
               </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section className="bg-wedding-50 relative flex min-h-screen flex-col p-5 sm:items-center sm:justify-center sm:p-5">
-        <div className="relative mt-10 flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <div className="absolute right-0 top-0 hidden h-[250px] w-[250px]">
-            <Image
-              src={"/wedding/25.png"}
-              alt="background"
-              width={500}
-              height={500}
-              className={"grayscale"}
-            />
-          </div>
-          <p className="relative mb-2 font-garet text-sm">THE DATE</p>
-          <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-          <div className="flex w-full flex-col items-start gap-3">
-            <p className="font-hilsfiger relative text-2xl md:text-4xl">
-              Religious Ceremony
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger relative text-xl md:text-2xl`}
-            >
-              Friday, 19th January 2024
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger relative text-xl md:text-2xl`}
-            >
-              09:00~10:30
-            </p>
-            {/* <p className="font-hilsfiger relative text-xl md:text-3xl">
-              January 19<span className="font-hilsfiger text-sm">th</span>
-            </p>
-            <p className="font-hilsfiger relative text-xl md:text-3xl">2024</p>
+          {/* PORTRAITS */}
+          <section className="bg-invitation-100 mt-10 flex flex-col">
+            <div className="relative mx-auto flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2">
+              <div className="flex w-full flex-col px-5 md:px-0">
+                <Fade bottom>
+                  <p className="font-seasons mb-2 text-xl uppercase">
+                    THE PORTRAITS
+                  </p>
+                </Fade>
+                <Fade bottom>
+                  <div className="bg-invitation-500 mb-3 h-0.5 w-10"></div>
+                </Fade>
+              </div>
+              <div className="relative mt-5 flex w-full flex-col gap-3 overflow-hidden">
+                <div
+                  className="w-[50%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(0);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/1.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+                <div
+                  className="absolute right-3 top-5 z-10 w-[50%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(1);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/2.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+                <div
+                  className="w-[56%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(2);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/3.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+                <div
+                  className="absolute -right-8 bottom-5 z-10 w-[50%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(3);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/4.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+              </div>
+              <p className="text-invitation-500 mt-5 px-5 font-garet text-sm italic">
+                &quot;May the true love you share today, grow stronger as you
+                grow together.&quot;
+              </p>
+              <div className="relative mt-5 flex w-full flex-col items-end gap-3 overflow-hidden">
+                <div
+                  className="w-[50%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(5);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/6.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+                <div
+                  className="absolute -left-3 top-0 z-10 w-[45%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(4);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/5.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+                <div
+                  className="z-10 mr-3 w-[70%] hover:cursor-pointer"
+                  onClick={() => {
+                    setOpen(true);
+                    setIndex(6);
+                  }}
+                >
+                  <Image
+                    src={"/portrait/us/7.jpeg"}
+                    alt="wedding"
+                    width={1000}
+                    height={1500}
+                  />
+                </div>
+              </div>
 
-            <p className={"font-hilsfiger text-wedding-25 relative text-xl"}>
-              09:00~10.30
-            </p> */}
-          </div>
-
-          <div className="mt-10 flex w-full flex-col gap-3 md:items-end">
-            <div className="absolute left-0 hidden h-[200px] w-[200px] sm:h-[250px] sm:w-[250px] md:block">
-              <Image
-                src={"/wedding/27.png"}
-                alt="background"
-                width={500}
-                height={500}
-                className={" "}
-              />
+              {open && (
+                <Lightbox
+                  images={images}
+                  onClose={() => setOpen(false)}
+                  startIndex={index}
+                />
+              )}
             </div>
-            <div className="absolute right-0 h-[200px] w-[200px] sm:h-[250px] sm:w-[250px] md:hidden">
-              <Image
-                src={"/wedding/27.png"}
-                alt="background"
-                width={500}
-                height={500}
-                className={" "}
-              />
+          </section>
+
+          {/* WISH */}
+          <Wish id={id} name={data.name} />
+
+          {/* FOOTER */}
+          <section className="bg-invitation-100 flex h-full flex-col overflow-hidden p-5 sm:items-center sm:justify-center">
+            <div className="relative flex w-full flex-col items-end gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
+              <div className="-mr-20 h-[189px] w-[250px]">
+                <Image
+                  src={"/illustration/Flower vase.png"}
+                  alt="background"
+                  width={500}
+                  height={500}
+                  className={"opacity-30"}
+                />
+              </div>
+              <p className="font-montserrat relative mb-2 text-sm">
+                WEDDING INVITATION OF
+              </p>
+              <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
+              <p className="font-seasons relative text-4xl">
+                Aning <span className="font-altha">&</span> Adit
+              </p>
+
+              <p className="relative mb-2 font-garet text-sm">
+                Saturday, January 20th 2024.
+              </p>
             </div>
-            <p className="font-hilsfiger relative text-2xl md:text-4xl">
-              Wedding Celebration
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger relative text-xl md:text-2xl`}
-            >
-              Saturday, 20th January 2024
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger relative text-xl md:text-2xl`}
-            >
-              09:00~15:00
-            </p>
-            {/* <p className="font-hilsfiger relative text-xl md:text-3xl">
-              Saturday
-            </p>
-            <p className="font-hilsfiger relative text-xl md:text-3xl">
-              January 20<span className="font-hilsfiger text-sm">th</span>
-            </p>
-            <p className="font-hilsfiger relative text-xl md:text-3xl">2024</p>
-
-            <p className={"font-hilsfiger text-wedding-25 relative text-xl"}>
-              09:30~15:00
-            </p> */}
-          </div>
-
-          <div className="mt-5 flex w-full md:justify-end">
-            <a
-              href="#"
-              className={`${albertSans.className} text-wedding-75 hover:text-wedding-75 relative text-lg font-light font-medium underline transition duration-200`}
-            >
-              Add to calendar
-            </a>
-          </div>
-        </div>
-
-        <div className="relative mt-20 flex w-full flex-col items-end gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <p className="relative mb-2 font-garet text-sm">THE VENUE</p>
-          <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-          <div className="flex w-full justify-end">
-            <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px]">
-              <Image
-                src={"/wedding/17.png"}
-                alt="background"
-                width={500}
-                height={500}
-                className={" "}
-              />
-            </div>
-          </div>
-          <p className="font-hilsfiger relative w-full text-left text-2xl md:text-4xl">
-            Religious Ceremony
-          </p>
-          <p
-            className={`${albertSans.className} font-hilsfiger relative w-full text-left text-xl md:text-2xl`}
-          >
-            Masjid Riyadhul Jannah Al Ma&apos;unah
-          </p>
-          <p className="font-hilsfiger relative mt-5 w-full text-left text-2xl md:text-4xl">
-            Wedding Celebration
-          </p>
-          <div className="w-full">
-            <p
-              className={`${albertSans.className} font-hilsfiger relative w-full text-left text-xl md:text-2xl`}
-            >
-              SDIT Rejis,
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger relative w-full text-left text-xl md:text-2xl`}
-            >
-              Perum Kodam Blok A No. 27
-            </p>
-            <p
-              className={`${albertSans.className} font-hilsfiger text-wedding-25 relative w-full text-left text-lg md:text-xl`}
-            >
-              Kec. Mustikajaya, Kota Bekasi, Jawa Barat. 17158. Indonesia.
-            </p>
-          </div>
-          {/* <p className="font-hilsfiger relative w-full text-left text-3xl md:text-4xl">
-            SDIT Rejis,
-          </p> */}
-
-          {/* <p className="font-hilsfiger relative w-full text-left text-xl md:text-4xl">
-            Perum Kodam Blok A No. 27
-          </p>
-          <p
-            className={`${albertSans.className} font-hilsfiger text-wedding-25 relative relative w-full text-left text-lg md:text-xl`}
-          >
-            Kec. Mustikajaya, Kota Bekasi, Jawa Barat. 17158. Indonesia.
-          </p> */}
-          <div className="mt-5 w-full items-start">
-            <a
-              href="https://maps.app.goo.gl/Zv5AiFmqf1cuAAKy5"
-              target="_blank"
-              className={`${albertSans.className} text-wedding-75 hover:text-wedding-75 w-fit text-left text-lg font-light font-medium underline transition duration-200`}
-            >
-              View on Maps
-            </a>
-          </div>
-        </div>
-        <div className="mt-10 w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <p
-            className={`${albertSans.className} text-wedding-25 w-4/3 text-lg font-light md:w-1/3`}
-          >
-            Please join us as we celebrate our wedding.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-wedding-50 mt-10 flex flex-col">
-        <div className="relative mx-auto flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <div className="flex w-full flex-col px-5 md:px-0">
-            <Fade bottom>
-              <p className="mb-2 font-garet text-sm md:px-0">THE PORTRAITS</p>
-            </Fade>
-            <Fade bottom>
-              <div className="mb-3 h-0.5 w-10 bg-zinc-400"></div>
-            </Fade>
-          </div>
-          <div className="flex w-full flex-col">
-            <div className="w-2/3 items-start">
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/11.jpeg", speed: -5 }]}
-                className="aspect-square"
-              />
-            </div>
-          </div>
-          <div className="grid -translate-y-16 justify-items-end">
-            <div className="w-2/3">
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/13.jpeg", speed: -5 }]}
-                className="aspect-square"
-              />
-            </div>
-            <p
-              className={`text-wedding-25 mt-5 px-5 font-garet italic md:w-1/3 md:px-0`}
-            >
-              &quot;May the true love you share today, grow stronger as you grow
-              together.&quot;
-            </p>
-          </div>
-          <div className="flex w-full flex-col">
-            <div className="z-10 w-2/3 items-start">
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/16.jpeg", speed: -5 }]}
-                className="aspect-square"
-              />
-            </div>
-          </div>
-          <div className="relative grid -translate-y-10 justify-items-end">
-            <div className="w-2/3">
-              <ParallaxBanner
-                layers={[{ image: "/portrait/collage/14.jpeg", speed: -5 }]}
-                className="aspect-square"
-              />
-            </div>
-            <div className="absolute bottom-0 left-0 ml-5 flex flex-col gap-2">
-              <p className="font-hilsfiger text-wedding-75 text-lg">20</p>
-              <p className="font-hilsfiger text-wedding-75 text-lg">01</p>
-              <p className="font-hilsfiger text-wedding-75 text-lg">24</p>
-              <p className="font-hilsfiger text-wedding-75 text-lg">/</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Wish id={id} name={data.name} />
-
-      <section className="bg-wedding-50 flex h-full flex-col p-10 sm:items-center sm:justify-center sm:p-5">
-        <div className="relative flex w-full flex-col items-end gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
-          <div className="h-[250px] w-[250px]">
-            <Image
-              src={"/wedding/24.png"}
-              alt="background"
-              width={500}
-              height={500}
-              className={""}
-            />
-          </div>
-          <p className="relative mb-2 font-garet text-sm">
-            WEDDING INVITATION OF
-          </p>
-          <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-          <p className="font-hilsfiger relative text-4xl">Aning & Adit</p>
-
-          <p className="relative mb-2 font-garet text-sm">
-            Saturday, January 20th 2024.
-          </p>
-        </div>
-      </section>
-    </main>
+          </section>
+        </main>
+      )}
+    </>
   );
 }

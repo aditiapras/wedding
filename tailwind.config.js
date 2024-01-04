@@ -28,6 +28,8 @@ module.exports = {
         navitism: ["Navitism", "sans-serif"],
         hilsfiger: ["Hilsfiger", "sans-serif"],
         helvetica: ["Helvetica Neue", "sans-serif"],
+        seasons: ["var(--font-seasons)"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {
         wedding: {
@@ -43,6 +45,14 @@ module.exports = {
           700: "#E2B96A",
           800: "#F4EADC",
           900: "#FAF5EF",
+        },
+        invitation: {
+          100: "#f3f0ed",
+          200: "#b2b3aa",
+          300: "#c4b29d",
+          400: "#b3937c",
+          500: "#527b80",
+          600: "#222e33",
         },
       },
       keyframes: {

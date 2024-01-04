@@ -1,5 +1,4 @@
 import { guestLists } from "@/lib/serverFetch";
-// import AnimatedPage from "./Animated";
 import dynamic from "next/dynamic";
 
 const AnimatedPage = dynamic(() => import("./Animated"), {

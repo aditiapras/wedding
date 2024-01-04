@@ -3,7 +3,29 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import { ParallaxProviders } from "./paralax-provider";
 
+import localFont from "next/font/local";
+
 const inter = Inter({ subsets: ["latin"] });
+const seasons = localFont({
+  src: [
+    {
+      path: "../public/fonts/the-seasons/light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/the-seasons/reg.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/the-seasons/bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-seasons",
+});
 
 export const metadata = {
   title: "Invitation | Aning & Adit",
@@ -27,7 +49,7 @@ export default function RootLayout({ children }) {
         />
         <meta property="og:image:type" content="image/png" />
       </head>
-      <body className={`${inter.className} bg-wedding-50`}>
+      <body className={`${inter.className} ${seasons.className} bg-wedding-50`}>
         <Providers>
           <ParallaxProviders>{children}</ParallaxProviders>
         </Providers>

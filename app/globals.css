@@ -8,11 +8,9 @@
 @import url('https://fonts.cdnfonts.com/css/navitism');
 @import url('https://fonts.cdnfonts.com/css/hilsfiger');
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-55');
-
+@import url('https://fonts.cdnfonts.com/css/montserrat');
 
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
- 
