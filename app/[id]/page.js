@@ -8,11 +8,10 @@ const AnimatedPage = dynamic(() => import("./Animated"), {
 export default async function Page({ params }) {
   const id = params.id;
   const data = await guestLists(id);
-  const name = data.name;
 
   return (
     <>
-      <AnimatedPage data={data} id={id} name={name}></AnimatedPage>
+      <AnimatedPage data={data} id={id}></AnimatedPage>
     </>
   );
 }

@@ -90,7 +90,7 @@ export default function Tables() {
       cell: ({ row }) => {
         const data = row.original;
         const name = data.name;
-        return <p className="w-full truncate text-xs">{name}</p>;
+        return <p className="w-full text-sm">{name}</p>;
       },
     },
     {
@@ -101,7 +101,7 @@ export default function Tables() {
           <a
             href={info.getValue()}
             target="_blank"
-            className="hover:text-blue-600 hover:underline"
+            className="truncate hover:text-blue-600 hover:underline"
           >
             {info.getValue()}
           </a>
@@ -116,26 +116,26 @@ export default function Tables() {
       accessorKey: "guestOf",
       header: "Guest of",
     },
-    {
-      accessorKey: "type",
-      header: "Type",
-    },
-    {
-      accessorKey: "relationship",
-      header: "Relationship",
-    },
+    // {
+    //   accessorKey: "type",
+    //   header: "Type",
+    // },
+    // {
+    //   accessorKey: "relationship",
+    //   header: "Relationship",
+    // },
     {
       accessorKey: "phone",
       header: "Phone",
     },
-    {
-      accessorKey: "address",
-      header: "Address",
-    },
-    {
-      accessorKey: "invitationStatus",
-      header: "Invitation Status",
-    },
+    // {
+    //   accessorKey: "address",
+    //   header: "Address",
+    // },
+    // {
+    //   accessorKey: "invitationStatus",
+    //   header: "Invitation Status",
+    // },
 
     {
       accessorKey: "actions",
@@ -145,18 +145,14 @@ export default function Tables() {
         const phoneNumber = getRow.phone;
         const guest = getRow.name;
         const invitationLink = getRow.url;
-        const message = `https://api.whatsapp.com/send?phone=62${phoneNumber.substring(
-          1,
-        )}&text=*Wedding%20Invitation%20of%20Adit%20%26%20Aning*%0A%0ABismillahirrahmanirrahim%0AAssalamu%27alaikum%20Warahmatullahi%20Wabarakatuh%0A%0AYth.%20${guest}%2C%0A%0ADengan%20mengharap%20ridha%20dan%20rahmat%20Allah%20SWT%2C%20serta%20tanpa%20mengurangi%20rasa%20hormat.%20Perkenankan%20kami%20mengundang%20Bpk%2FIbu%2FSdr%2Fi%20untuk%20hadir%20di%20acara%20pernikahan%20kami%20pada%3A%0A%0ANama%3A%20Masning%20Maunah%2C%20S.P.%20%26%20Aditia%20Prasetian%2C%20S.T.%0AHari%2FTgl%3A%20Sabtu%2C%2020%20Januari%202024%0APukul%3A%2011.00%20-%2013.30%0ALokasi%3A%20Perum%20Kodam%20Jaya%20Blok%20A%2C%20No.%2019%0A%0AMerupakan%20suatu%20kehormatan%20bagi%20kami%20apabila%20Bpk%2FIbu%2FSdr%2Fi%20dapat%20menghadiri%2F%20menyaksikan%20prosesi%20pernikahan%20kami%20pada%20tautan%20dibawah%20ini%3A%0A%0A${invitationLink}%0A%0AKami%20juga%20mengharapkan%20ucapan%2C%20harapan%2C%20serta%20doa%20Bpk%2FIbu%2FSdr%2Fi%20untuk%20kami.%0A%0AAtas%20perhatiannya%20kami%20ucapkan%20terimakasih.`;
+        const message = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=*Wedding%20Invitation%20of%20Adit%20%26%20Aning*%0A%0ABismillahirrahmanirrahim%0AAssalamu%27alaikum%20Warahmatullahi%20Wabarakatuh%0A%0AYth.%20${guest}%2C%0A%0ADengan%20mengharap%20ridha%20dan%20rahmat%20Allah%20SWT%2C%20serta%20tanpa%20mengurangi%20rasa%20hormat.%20Perkenankan%20kami%20mengundang%20Bpk%2FIbu%2FSdr%2Fi%20untuk%20hadir%20di%20acara%20pernikahan%20kami%20pada%3A%0A%0ANama%3A%20Masning%20Maunah%2C%20S.P.%20%26%20Aditia%20Prasetian%2C%20S.T.%0AHari%2FTgl%3A%20Sabtu%2C%2020%20Januari%202024%0APukul%3A%2009.00%20-%2015.00%0ALokasi%3A%20Perum%20Kodam%20Jaya%20Blok%20A%2C%20No.%2019%0A%0AMerupakan%20suatu%20kehormatan%20bagi%20kami%20apabila%20Bpk%2FIbu%2FSdr%2Fi%20dapat%20menghadiri%2F%20menyaksikan%20prosesi%20pernikahan%20kami%20pada%20tautan%20dibawah%20ini%3A%0A%0A${invitationLink}%0A%0AKami%20juga%20mengharapkan%20ucapan%2C%20harapan%2C%20serta%20doa%20Bpk%2FIbu%2FSdr%2Fi%20untuk%20kami.%0A%0AAtas%20perhatiannya%20kami%20ucapkan%20terimakasih.`;
         return (
           <a
-            href={`https://api.whatsapp.com/send/?phone=62${phoneNumber.substring(
-              1,
-            )}&text=${message}&type=phone_number&app_absent=0`}
+            href={`https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${message}&type=phone_number&app_absent=0`}
             target="_blank"
             className="flex w-fit items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500"
           >
-            Send Invitation <Send className="h-4 w-4" />
+            Send <Send className="h-4 w-4" />
           </a>
         );
       },
@@ -164,7 +160,7 @@ export default function Tables() {
   ];
 
   return (
-    <section className="flex flex-col gap-5 px-10 py-5">
+    <section className="flex flex-col gap-5 px-10 py-5 dark:bg-zinc-800">
       <div className="flex items-center gap-5">
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -189,9 +185,9 @@ export default function Tables() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <select
-                name="type"
-                id="type"
+              {/* <select
+                name="types"
+                id="types"
                 className="w-full rounded-md border p-2"
                 value={type}
                 onChange={(e) => setType(e.target.value)}
@@ -199,7 +195,7 @@ export default function Tables() {
                 <option value="">Select</option>
                 <option value="Adult">Adult</option>
                 <option value="Child">Child</option>
-              </select>
+              </select> */}
               <select
                 name="guestOf"
                 id="guestOf"
@@ -211,7 +207,7 @@ export default function Tables() {
                 <option value="Masning Maunah">Masning Maunah</option>
                 <option value="Aditia Prasetian">Aditia Prasetian</option>
               </select>
-              <select
+              {/* <select
                 name="relationship"
                 id="relationship"
                 className="w-full rounded-md border p-2"
@@ -233,7 +229,7 @@ export default function Tables() {
                 <option value="Karyawan Rumah">Karyawan Rumah</option>
                 <option value="Karyawan Abi">Karyawan Abi</option>
                 <option value="Teman">Teman</option>
-              </select>
+              </select> */}
               <input
                 type="text"
                 name="phone"
@@ -243,7 +239,7 @@ export default function Tables() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
-              <input
+              {/* <input
                 type="text"
                 name="address"
                 id="address"
@@ -251,7 +247,7 @@ export default function Tables() {
                 className="w-full rounded-md border p-2"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-              />
+              /> */}
 
               <AlertDialogFooter className={"mt-5 flex justify-end gap-3"}>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>

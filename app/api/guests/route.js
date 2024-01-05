@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import moment from "moment-timezone";
 
-
 export async function GET(req) {
   const auth = await google.auth.getClient({
     credentials: {
@@ -23,7 +22,7 @@ export async function GET(req) {
     if (!id) {
       const res = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
-        range: `Guest!A2:K2000`,
+        range: `Guest!A2:L2000`,
       });
       const data = res.data.values.map((row) => {
         return {
@@ -36,13 +35,14 @@ export async function GET(req) {
           phone: row[6],
           address: row[7],
           invitationStatus: row[8],
+          session: row[11],
         };
       });
       return NextResponse.json(data);
     } else {
       const res = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
-        range: `Guest!A2:K2000`,
+        range: `Guest!A2:L2000`,
       });
       const data = res.data.values.map((row) => {
         return {
@@ -55,6 +55,7 @@ export async function GET(req) {
           phone: row[6],
           address: row[7],
           invitationStatus: row[8],
+          session: row[11],
         };
       });
 
@@ -116,7 +117,7 @@ export async function POST(req) {
               body.relationship,
               `'${body.phone}`,
               body.address,
-              "Belum Terkirim",
+              "",
               `="Message!B"&MATCH("${body.name}",Message!A:A,0)`,
               `="Guest!C"&MATCH("${body.name}",Guest!A:A,0)`,
             ],

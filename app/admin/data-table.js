@@ -74,19 +74,8 @@ export default function DataTable({ data, columns }) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center gap-5">
-        <input
-          type="text"
-          name="filter"
-          id="filter"
-          className="w-60 rounded-md border p-1.5 transition hover:border-emerald-500 focus-visible:outline-green-600"
-          placeholder="Search by Guest Name..."
-          value={table.getColumn("name")?.getFilterValue() || ""}
-          onChange={(e) =>
-            table.getColumn("name")?.setFilterValue(e.target.value)
-          }
-        />
-        <div className="relative flex w-40 flex-col">
+      <div className="mt-5 flex flex-col items-start gap-5 md:flex-row">
+        <div className="relative mt-5 flex w-full flex-col md:mt-0 md:w-40">
           <label htmlFor="filterByName" className="absolute -top-5 text-xs">
             Filter by Guest of
           </label>
@@ -99,7 +88,7 @@ export default function DataTable({ data, columns }) {
             theme={customTheme}
           />
         </div>
-        <div className="relative flex w-40 flex-col">
+        <div className="relative mt-3 flex w-full flex-col md:mt-0 md:w-40">
           <label htmlFor="filterByName" className="absolute -top-5 text-xs">
             Filter by Invitation Status
           </label>
@@ -112,6 +101,17 @@ export default function DataTable({ data, columns }) {
             theme={customTheme}
           />
         </div>
+        <input
+          type="text"
+          name="filter"
+          id="filter"
+          className="w-full rounded-md border p-1.5 transition hover:border-emerald-500 focus-visible:outline-green-600 dark:bg-white dark:text-zinc-950 md:w-60"
+          placeholder="Search by Guest Name..."
+          value={table.getColumn("name")?.getFilterValue() || ""}
+          onChange={(e) =>
+            table.getColumn("name")?.setFilterValue(e.target.value)
+          }
+        />
       </div>
 
       <Table>

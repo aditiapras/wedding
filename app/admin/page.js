@@ -41,14 +41,14 @@ export default function Admin() {
 
   if (!mounted)
     return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center dark:bg-zinc-700">
         Please Wait...
       </div>
     );
 
   if (!open)
     return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center dark:bg-zinc-700">
         <Toaster
           position="top-center"
           closeButton
@@ -58,7 +58,7 @@ export default function Admin() {
         <form className="flex items-center gap-3" onSubmit={handleSubmit}>
           <input
             placeholder="Enter Pass Key"
-            className="rounded-md border p-2"
+            className="rounded-md border p-2 dark:bg-white dark:text-zinc-900"
             type="password"
             onChange={(e) => setPass(e.target.value)}
           />
@@ -73,7 +73,9 @@ export default function Admin() {
     );
 
   return (
-    <main className={`${inter.className} flex min-h-screen w-full flex-col`}>
+    <main
+      className={`${inter.className} flex min-h-screen w-full flex-col dark:bg-zinc-800`}
+    >
       <nav className="flex items-center justify-between border-b px-10 py-5">
         <p className="text-xl font-semibold">Guest Management</p>
         <Button

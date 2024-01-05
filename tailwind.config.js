@@ -28,7 +28,12 @@ module.exports = {
         navitism: ["Navitism", "sans-serif"],
         hilsfiger: ["Hilsfiger", "sans-serif"],
         helvetica: ["Helvetica Neue", "sans-serif"],
-        seasons: ["var(--font-seasons)"],
+        // seasons: ["var(--font-seasons)"],
+        seasons: [
+          "Typographer Rotunda Alt",
+          "Typographer Rotunda",
+          "sans-serif",
+        ],
         montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {

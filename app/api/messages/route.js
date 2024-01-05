@@ -32,6 +32,7 @@ export async function GET() {
         postTime: row[3],
         rsvp: row[4],
         editRange: row[6],
+        peopleCount: row[7],
       };
     });
 
@@ -72,6 +73,7 @@ export async function POST(req) {
           body.rsvp,
           `=VLOOKUP("${body.name}",Guest!A:E,3,0)`,
           `="Message!B"&MATCH("${body.name}",Message!A:A,0)`,
+          body.peopleCount,
         ],
       ],
     },
