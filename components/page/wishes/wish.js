@@ -193,8 +193,9 @@ export default function Wish({ id, name }) {
           </Fade>
         </div>
       )}
+
       <div className="mt-10 flex w-full flex-col flex-col-reverse gap-3 pt-5 sm:w-3/4 md:w-2/3 lg:w-1/2">
-        {filteredData
+        {data
           .filter((item) => item.rowId == 3)
           .map((item) => {
             return (
@@ -254,6 +255,7 @@ export default function Wish({ id, name }) {
             );
           })}
       </div>
+
       <Fade bottom>
         <div className="flex justify-center">
           {data.length > 4 && totalLoaded + 1 <= count && (

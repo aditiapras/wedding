@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="bg-invitation-100 relative flex min-h-screen w-full flex-col items-center justify-center p-5">
+    <div className="bg-invitation-100 text-invitation-600 relative flex min-h-screen w-full flex-col items-center justify-center p-5">
       {/* <p className={`font-garet text-xl text-wedding-100`}>The Wedding of</p>
       <p className={`font-seasons text-5xl text-wedding-100`}>Aning & Adit</p>
       <p className={`text font-garet text-wedding-100`}>20th January, 2024</p> */}

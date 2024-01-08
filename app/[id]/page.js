@@ -5,13 +5,21 @@ const AnimatedPage = dynamic(() => import("./Animated"), {
   ssr: false,
 });
 
+const CustomPage = dynamic(() => import("./Custom"), {
+  ssr: false,
+});
+
 export default async function Page({ params }) {
   const id = params.id;
   const data = await guestLists(id);
 
   return (
     <>
-      <AnimatedPage data={data} id={id}></AnimatedPage>
+      {id === "aningadit" ? (
+        <CustomPage data={data} id={id}></CustomPage>
+      ) : (
+        <AnimatedPage data={data} id={id}></AnimatedPage>
+      )}
     </>
   );
 }
