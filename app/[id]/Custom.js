@@ -59,22 +59,22 @@ export default function CustomPage({ data, id }) {
           style={{ objectFit: "cover", position: "absolute" }}
           quality={100}
         />
-        <div className="from-wedding-50 absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t to-transparent"></div>
-        <div className="from-wedding-50 absolute top-0 z-10 h-1/3 w-full bg-gradient-to-b to-transparent"></div>
+        <div className="absolute bottom-0 z-10 h-1/3 w-full bg-gradient-to-t from-wedding-50 to-transparent"></div>
+        <div className="absolute top-0 z-10 h-1/3 w-full bg-gradient-to-b from-wedding-50 to-transparent"></div>
         <div className="relative z-20 mt-10  flex flex-col items-center justify-center">
           <div className="my-16 flex flex-col items-center justify-center gap-2">
             <Fade top>
-              <p className="text-invitation-600 font-montserrat relative text-xl md:text-3xl">
+              <p className="relative font-montserrat text-xl text-invitation-600 md:text-3xl">
                 The Wedding of
               </p>
             </Fade>
             <Zoom>
-              <p className="text-invitation-600 font-seasons text-5xl italic">
+              <p className="font-seasons text-5xl italic text-invitation-600">
                 Aning <span className="">&</span> Adit
               </p>
             </Zoom>
             <Fade bottom>
-              <p className="text-invitation-600 font-garet text-lg">
+              <p className="font-garet text-lg text-invitation-600">
                 20th January 2024
               </p>
             </Fade>
@@ -89,7 +89,7 @@ export default function CustomPage({ data, id }) {
                 play();
                 setPlaySong(true);
               }}
-              className="font-montserrat bg-invitation-400 hover:bg-invitation-300 relative rounded-full px-4 py-2 text-white transition duration-200 active:scale-95"
+              className="relative rounded-full bg-invitation-400 px-4 py-2 font-montserrat text-white transition duration-200 hover:bg-invitation-300 active:scale-95"
             >
               Buka Undangan
             </button>
@@ -101,7 +101,7 @@ export default function CustomPage({ data, id }) {
 
   if (!mounted)
     return (
-      <div className="bg-wedding-50 text-wedding-75 relative flex min-h-screen items-center justify-center">
+      <div className="relative flex min-h-screen items-center justify-center bg-wedding-50 text-wedding-75">
         <Image
           src={"/bg/6.png"}
           alt="wedding"
@@ -126,9 +126,9 @@ export default function CustomPage({ data, id }) {
   return (
     <>
       {!show && (
-        <main className="text-invitation-600 bg-invitation-100 font-seasons relative">
+        <main className="relative bg-invitation-100 font-seasons text-invitation-600">
           <button
-            className="bg-invitation-600 fixed bottom-5 left-5 z-30 rounded-full p-2 text-zinc-400 transition active:scale-90"
+            className="fixed bottom-5 left-5 z-30 rounded-full bg-invitation-600 p-2 text-zinc-400 transition active:scale-90"
             onClick={() => {
               setPlaySong(!playSong);
               if (playSong) {
@@ -146,9 +146,9 @@ export default function CustomPage({ data, id }) {
           </button>
 
           {/* Opening */}
-          <section className="bg-invitation-100 text-wedding-75 relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+          <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-invitation-100 text-wedding-75">
             <div
-              className={`font-montserrat relative flex w-full flex-col font-bold sm:w-3/4 md:w-2/3 lg:w-1/2`}
+              className={`relative flex w-full flex-col font-montserrat font-bold sm:w-3/4 md:w-2/3 lg:w-1/2`}
             >
               <div className="absolute right-5 top-5 flex flex-col items-center justify-center">
                 <p className=" text-xl">20</p>
@@ -166,19 +166,19 @@ export default function CustomPage({ data, id }) {
                   height={1000}
                   className={"opacity-20"}
                 />
-                <div className="from-invitation-100 absolute -bottom-3 h-32 w-full bg-gradient-to-t to-transparent"></div>
+                <div className="absolute -bottom-3 h-32 w-full bg-gradient-to-t from-invitation-100 to-transparent"></div>
               </div>
             </Fade>
 
             <Fade bottom cascade>
               <div className="relative flex h-screen w-full flex-col items-center justify-center sm:w-3/4 md:w-2/3 lg:w-1/2">
                 <p
-                  className={`font-seasons w-[200px] text-center text-4xl font-bold md:w-[300px] md:text-5xl`}
+                  className={`w-[200px] text-center font-seasons text-4xl font-bold md:w-[300px] md:text-5xl`}
                 >
                   WEDDING
                 </p>
                 <p
-                  className={`font-seasons w-[200px] text-center text-4xl font-bold md:w-[300px] md:text-5xl`}
+                  className={`w-[200px] text-center font-seasons text-4xl font-bold md:w-[300px] md:text-5xl`}
                 >
                   INVITATION
                 </p>
@@ -199,7 +199,7 @@ export default function CustomPage({ data, id }) {
           </section>
 
           {/* BRIDE AND GROOM */}
-          <section className="bg-invitation-100 mt-0 flex min-h-screen flex-col overflow-hidden p-5 sm:items-center sm:justify-center sm:p-5">
+          <section className="mt-0 flex min-h-screen flex-col overflow-hidden bg-invitation-100 p-5 sm:items-center sm:justify-center sm:p-5">
             <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
               <Fade right>
                 <div className="absolute right-0 h-[208px] w-[275px]">
@@ -213,31 +213,31 @@ export default function CustomPage({ data, id }) {
                 </div>
               </Fade>
               <Fade bottom>
-                <p className="font-seasons mb-2 text-xl uppercase">
+                <p className="mb-2 font-seasons text-xl uppercase">
                   The Invite
                 </p>
               </Fade>
               <Fade bottom>
-                <div className="bg-invitation-500 mb-3 h-0.5 w-10 "></div>
+                <div className="mb-3 h-0.5 w-10 bg-invitation-500 "></div>
               </Fade>
 
               <Fade bottom>
                 <p
-                  className={`text-invitation-600 font-garet text-sm font-light`}
+                  className={`font-garet text-sm font-light text-invitation-600`}
                 >
                   Bismillahirrahmanirrahim
                 </p>
               </Fade>
               <Fade bottom>
                 <p
-                  className={`text-invitation-600 font-garet text-sm font-light`}
+                  className={`font-garet text-sm font-light text-invitation-600`}
                 >
                   Assalamualaikum Warahmatullahi Wabarakatuh
                 </p>
               </Fade>
               <Fade bottom>
                 <p
-                  className={`text-invitation-600 font-garet text-sm font-light`}
+                  className={`font-garet text-sm font-light text-invitation-600`}
                 >
                   Kepada Yth.{" "}
                   {name === null || name === "" ? "Tamu Undangan" : name}
@@ -245,7 +245,7 @@ export default function CustomPage({ data, id }) {
               </Fade>
               <Fade bottom>
                 <p
-                  className={`text-invitation-600 w-4/3 font-garet text-sm font-light sm:w-1/2 md:w-1/2 lg:w-1/3`}
+                  className={`w-4/3 font-garet text-sm font-light text-invitation-600 sm:w-1/2 md:w-1/2 lg:w-1/3`}
                 >
                   Dengan memohon rahmat dan ridho Allah SWT. kami bermaksud
                   menyelenggarakan Akad Nikah dan Resepsi Pernikahan putra-putri
@@ -255,10 +255,10 @@ export default function CustomPage({ data, id }) {
 
               <Fade bottom>
                 <div className="mt-10 flex w-full flex-col items-end">
-                  <p className={`font-seasons mb-2 text-xl uppercase`}>
+                  <p className={`mb-2 font-seasons text-xl uppercase`}>
                     The Bride and The Groom
                   </p>
-                  <div className="bg-invitation-500 mb-3 h-0.5 w-10 "></div>
+                  <div className="mb-3 h-0.5 w-10 bg-invitation-500 "></div>
                 </div>
               </Fade>
 
@@ -291,17 +291,17 @@ export default function CustomPage({ data, id }) {
                   <Fade bottom cascade>
                     <div className="relative mt-1 flex w-full flex-col">
                       <p
-                        className={`font-seasons text-right text-2xl md:text-3xl`}
+                        className={`text-right font-seasons text-2xl md:text-3xl`}
                       >
                         Masning Maunah S.P.
                       </p>
                       <p
-                        className={`text-wedding-25 text-right font-garet text-sm`}
+                        className={`text-right font-garet text-sm text-wedding-25`}
                       >
                         Putri kelima dari Bapak Drs. H. M Mulyono dan
                       </p>
                       <p
-                        className={`text-wedding-25 text-right font-garet text-sm`}
+                        className={`text-right font-garet text-sm text-wedding-25`}
                       >
                         Ibu Hj. Nining Raniah S.E.
                       </p>
@@ -337,14 +337,14 @@ export default function CustomPage({ data, id }) {
                   <Fade bottom cascade>
                     <div className="relative mt-1 flex w-full flex-col">
                       <p
-                        className={`font-seasons text-left text-2xl md:text-3xl`}
+                        className={`text-left font-seasons text-2xl md:text-3xl`}
                       >
                         Aditia Prasetian S.T.
                       </p>
-                      <p className={`text-wedding-25 mt-1 font-garet text-sm`}>
+                      <p className={`mt-1 font-garet text-sm text-wedding-25`}>
                         Putra keempat dari Bapak Cece Rustandi dan
                       </p>
-                      <p className={`text-wedding-25 font-garet text-sm`}>
+                      <p className={`font-garet text-sm text-wedding-25`}>
                         Ibu (Almh) Setia Komala
                       </p>
                     </div>
@@ -355,13 +355,13 @@ export default function CustomPage({ data, id }) {
           </section>
 
           {/* DATE AND VENUE */}
-          <section className="bg-invitation-100 relative mt-10 flex flex-col overflow-hidden p-5 sm:items-center sm:justify-center sm:p-5">
+          <section className="relative mt-10 flex flex-col overflow-hidden bg-invitation-100 p-5 sm:items-center sm:justify-center sm:p-5">
             <div className="relative flex w-full flex-col items-start gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
               <Fade bottom>
-                <p className="font-seasons relative mb-2 text-xl uppercase">
+                <p className="relative mb-2 font-seasons text-xl uppercase">
                   The Date and The Venue
                 </p>
-                <div className="bg-invitation-500 relative mb-3 h-0.5 w-10"></div>
+                <div className="relative mb-3 h-0.5 w-10 bg-invitation-500"></div>
               </Fade>
 
               <div className="relative flex w-full flex-col items-start gap-0">
@@ -378,7 +378,7 @@ export default function CustomPage({ data, id }) {
                 </Fade>
                 <Fade bottom>
                   <p
-                    className={`font-montserrat relative mb-3 text-2xl font-medium md:text-3xl`}
+                    className={`relative mb-3 font-montserrat text-2xl font-medium md:text-3xl`}
                   >
                     Akad Nikah
                   </p>
@@ -386,7 +386,7 @@ export default function CustomPage({ data, id }) {
                     Jum&apos;at, 19 Januari 2024
                   </p>
                   <p
-                    className={`font-montserrat relative text-sm font-bold md:text-lg`}
+                    className={`relative font-montserrat text-sm font-bold md:text-lg`}
                   >
                     08:30~10:30
                   </p>
@@ -412,7 +412,7 @@ export default function CustomPage({ data, id }) {
               <div className="relative mt-16 flex w-full flex-col items-end gap-0">
                 <Fade bottom>
                   <p
-                    className={`font-montserrat relative mb-3 text-2xl font-medium md:text-3xl`}
+                    className={`relative mb-3 font-montserrat text-2xl font-medium md:text-3xl`}
                   >
                     Resepsi
                   </p>
@@ -420,7 +420,7 @@ export default function CustomPage({ data, id }) {
                     Sabtu, 20 Januari 2024
                   </p>
                   <p
-                    className={`font-montserrat relative text-sm font-bold md:text-lg`}
+                    className={`relative font-montserrat text-sm font-bold md:text-lg`}
                   >
                     {session == 1
                       ? "09:00~12:00 (Sesi 1)"
@@ -450,7 +450,7 @@ export default function CustomPage({ data, id }) {
                 <p
                   className={`relative mt-10 w-full text-center font-garet text-sm md:text-lg`}
                 >
-                  Merupakan suatu kehormatan dan kebagahiaan bagi kami apabila
+                  Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
                   Bapak/Ibu/Saudara/i berkenan hadir untuk memberika do&apos;a
                   restu kepada kedua mempelai.
                 </p>
@@ -460,7 +460,7 @@ export default function CustomPage({ data, id }) {
                   <a
                     href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240120T020000Z%2F20240120T080000Z&details=Assalamualaikum%20Warahmatullahi%20Wabarakatuh%2C%20with%20the%20blessing%20and%20mercy%20from%20Allah%20SWT%20We%20cordially%20invite%20you%20to%20the%20wedding%20of%20Aning%20%26%20Adit%20as%20they%20exchange%20vows%20and%20start%20their%20journey%20together%20as%20one.&location=Bekasi&text=Wedding%27s%20of%20Aning%20%26%20Adit%20"
                     target="_blank"
-                    className={`text-wedding-75  bg-invitation-500 hover:bg-invitation-500/80 text-md relative w-fit rounded-full px-4 py-2 font-garet text-white transition duration-200`}
+                    className={`text-md  relative w-fit rounded-full bg-invitation-500 px-4 py-2 font-garet text-wedding-75 text-white transition duration-200 hover:bg-invitation-500/80`}
                   >
                     Tambahkan ke Kalender
                   </a>
@@ -469,7 +469,7 @@ export default function CustomPage({ data, id }) {
                   <a
                     href="https://maps.app.goo.gl/Zv5AiFmqf1cuAAKy5"
                     target="_blank"
-                    className={`text-wedding-75  bg-invitation-500 hover:bg-invitation-500/80 text-md relative w-fit rounded-full px-4 py-2 font-garet text-white transition duration-200`}
+                    className={`text-md  relative w-fit rounded-full bg-invitation-500 px-4 py-2 font-garet text-wedding-75 text-white transition duration-200 hover:bg-invitation-500/80`}
                   >
                     Lihat Peta
                   </a>
@@ -479,16 +479,16 @@ export default function CustomPage({ data, id }) {
           </section>
 
           {/* PORTRAITS */}
-          <section className="bg-invitation-100 mt-10 flex flex-col">
+          <section className="mt-10 flex flex-col bg-invitation-100">
             <div className="relative mx-auto flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2">
               <div className="flex w-full flex-col px-5 md:px-0">
                 <Fade bottom>
-                  <p className="font-seasons mb-2 text-xl uppercase">
+                  <p className="mb-2 font-seasons text-xl uppercase">
                     THE PORTRAITS
                   </p>
                 </Fade>
                 <Fade bottom>
-                  <div className="bg-invitation-500 mb-3 h-0.5 w-10"></div>
+                  <div className="mb-3 h-0.5 w-10 bg-invitation-500"></div>
                 </Fade>
               </div>
 
@@ -527,7 +527,7 @@ export default function CustomPage({ data, id }) {
                 </Zoom>
               </div>
               <Fade bottom>
-                <p className="text-invitation-500 mb-5 mt-5 px-5 text-center font-garet text-sm italic">
+                <p className="mb-5 mt-5 px-5 text-center font-garet text-sm italic text-invitation-500">
                   &quot;Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia
                   menciptakan pasangan-pasangan untukmu dari (jenis) dirimu
                   sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di
@@ -535,7 +535,7 @@ export default function CustomPage({ data, id }) {
                   demikian itu benar-benar terdapat tanda-tanda (kebesaran
                   Allah) bagi kaum yang berpikir.&quot;
                 </p>
-                <p className="text-invitation-500 mt-0 px-5 text-center font-garet text-sm italic">
+                <p className="mt-0 px-5 text-center font-garet text-sm italic text-invitation-500">
                   (QS. Ar-Ruum: 21)
                 </p>
               </Fade>
@@ -574,11 +574,11 @@ export default function CustomPage({ data, id }) {
                 </Zoom>
               </div>
               <Fade bottom>
-                <p className="text-invitation-500 mb-5 mt-5 px-5 text-center font-garet text-sm italic">
+                <p className="mb-5 mt-5 px-5 text-center font-garet text-sm italic text-invitation-500">
                   &quot;Dan segala sesuatu Kami ciptakan berpasang-pasangan agar
                   kamu mengingat (kebesaran Allah).&quot;
                 </p>
-                <p className="text-invitation-500 mt-0 px-5 text-center font-garet text-sm italic">
+                <p className="mt-0 px-5 text-center font-garet text-sm italic text-invitation-500">
                   (QS. Az Zariyat: 49)
                 </p>
               </Fade>
@@ -593,7 +593,7 @@ export default function CustomPage({ data, id }) {
           </section>
 
           {/* FOOTER */}
-          <section className="bg-invitation-100 mt-10 flex h-full flex-col overflow-hidden sm:items-center sm:justify-center">
+          <section className="mt-10 flex h-full flex-col overflow-hidden bg-invitation-100 sm:items-center sm:justify-center">
             <div className="relative flex w-full flex-col items-center gap-3 sm:w-3/4 md:w-2/3 lg:w-1/2">
               <Fade bottom>
                 <div className="h-[189px] w-[250px]">
@@ -607,11 +607,11 @@ export default function CustomPage({ data, id }) {
                 </div>
               </Fade>
               <Fade bottom>
-                <p className="font-montserrat relative mb-2 text-sm">
+                <p className="relative mb-2 font-montserrat text-sm">
                   WEDDING INVITATION OF
                 </p>
                 <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
-                <p className="font-seasons relative text-4xl">
+                <p className="relative font-seasons text-4xl">
                   Aning <span className="">&</span> Adit
                 </p>
 
@@ -621,7 +621,7 @@ export default function CustomPage({ data, id }) {
               </Fade>
             </div>
             <Fade bottom>
-              <p className="bg-invitation-500 relative mt-10 w-full py-2 text-center font-garet text-xs text-white">
+              <p className="relative mt-10 w-full bg-invitation-500 py-2 text-center font-garet text-xs text-white">
                 Powered by{" "}
                 <a href="https://lettre.id" target="_blank">
                   lettre.id
