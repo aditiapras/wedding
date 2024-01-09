@@ -26,9 +26,9 @@ export default function CustomPage({ data, id }) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const [playSong, setPlaySong] = useState(false);
-  const session = data?.session;
   const params = useSearchParams();
   const name = params.get("to");
+  const session = params.get("s");
 
   useEffect(() => {
     setTimeout(() => {
