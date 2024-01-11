@@ -298,7 +298,7 @@ export default function CustomPage({ data, id }) {
                       <p
                         className={`text-right font-garet text-sm text-wedding-25`}
                       >
-                        Putri kelima dari Bapak Drs. H. M Mulyono dan
+                        Putri kelima dari Bapak Drs. H. M. Mulyono dan
                       </p>
                       <p
                         className={`text-right font-garet text-sm text-wedding-25`}
@@ -350,6 +350,19 @@ export default function CustomPage({ data, id }) {
                     </div>
                   </Fade>
                 </div>
+                <Fade bottom>
+                  <p className="mb-5 mt-5  text-center font-garet text-sm italic text-invitation-500">
+                    &quot;Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia
+                    menciptakan pasangan-pasangan untukmu dari (jenis) dirimu
+                    sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan
+                    di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada
+                    yang demikian itu benar-benar terdapat tanda-tanda
+                    (kebesaran Allah) bagi kaum yang berpikir.&quot;
+                  </p>
+                  <p className="mt-0 px-5 text-center font-garet text-sm italic text-invitation-500">
+                    (QS. Ar-Ruum: 21)
+                  </p>
+                </Fade>
               </div>
             </div>
           </section>
@@ -475,11 +488,20 @@ export default function CustomPage({ data, id }) {
                   </a>
                 </div>
               </Fade>
+              <Fade bottom>
+                <p className="mb-5 mt-5 w-full px-5 text-center font-garet text-sm italic text-invitation-500">
+                  &quot;Dan segala sesuatu Kami ciptakan berpasang-pasangan agar
+                  kamu mengingat (kebesaran Allah).&quot;
+                </p>
+                <p className="mt-0 w-full px-5 text-center font-garet text-sm italic text-invitation-500">
+                  (QS. Az Zariyat: 49)
+                </p>
+              </Fade>
             </div>
           </section>
 
           {/* PORTRAITS */}
-          <section className="mt-10 flex flex-col bg-invitation-100">
+          {/* <section className="mt-10 flex flex-col bg-invitation-100">
             <div className="relative mx-auto flex w-full flex-col sm:w-3/4 md:w-2/3 lg:w-1/2">
               <div className="flex w-full flex-col px-5 md:px-0">
                 <Fade bottom>
@@ -526,19 +548,7 @@ export default function CustomPage({ data, id }) {
                   </div>
                 </Zoom>
               </div>
-              <Fade bottom>
-                <p className="mb-5 mt-5 px-5 text-center font-garet text-sm italic text-invitation-500">
-                  &quot;Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia
-                  menciptakan pasangan-pasangan untukmu dari (jenis) dirimu
-                  sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di
-                  antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang
-                  demikian itu benar-benar terdapat tanda-tanda (kebesaran
-                  Allah) bagi kaum yang berpikir.&quot;
-                </p>
-                <p className="mt-0 px-5 text-center font-garet text-sm italic text-invitation-500">
-                  (QS. Ar-Ruum: 21)
-                </p>
-              </Fade>
+
               <div className="relative mt-5 flex w-full flex-col items-end gap-3 overflow-hidden">
                 <Zoom>
                   <div
@@ -573,15 +583,7 @@ export default function CustomPage({ data, id }) {
                   </div>
                 </Zoom>
               </div>
-              <Fade bottom>
-                <p className="mb-5 mt-5 px-5 text-center font-garet text-sm italic text-invitation-500">
-                  &quot;Dan segala sesuatu Kami ciptakan berpasang-pasangan agar
-                  kamu mengingat (kebesaran Allah).&quot;
-                </p>
-                <p className="mt-0 px-5 text-center font-garet text-sm italic text-invitation-500">
-                  (QS. Az Zariyat: 49)
-                </p>
-              </Fade>
+
               {open && (
                 <Lightbox
                   images={images}
@@ -590,7 +592,7 @@ export default function CustomPage({ data, id }) {
                 />
               )}
             </div>
-          </section>
+          </section> */}
 
           {/* FOOTER */}
           <section className="mt-10 flex h-full flex-col overflow-hidden bg-invitation-100 sm:items-center sm:justify-center">
@@ -608,16 +610,24 @@ export default function CustomPage({ data, id }) {
               </Fade>
               <Fade bottom>
                 <p className="relative mb-2 font-montserrat text-sm">
-                  WEDDING INVITATION OF
+                  Kami yang berbahagia,
                 </p>
                 <div className="relative mb-3 h-0.5 w-10 bg-zinc-400 "></div>
                 <p className="relative font-seasons text-4xl">
                   Aning <span className="">&</span> Adit
                 </p>
 
-                <p className="relative mb-2 font-garet text-sm">
+                {/* <p className="relative mb-2 font-garet text-sm">
                   Sabtu, 20 Januari 2024.
+                </p> */}
+
+                <p className="relative mb-2 font-garet text-sm">
+                  Bpk. Drs. H. M. Mulyono & Ibu Hj. Nining Raniah, S.E
                 </p>
+                <p className="relative mb-2 font-garet text-sm">
+                  Bpk. Cece Rustandi & Ibu (Almh.) Setia Komala
+                </p>
+                {/* <p className="relative mb-2 font-garet text-sm">Aning & Adit</p> */}
               </Fade>
             </div>
             <Fade bottom>
